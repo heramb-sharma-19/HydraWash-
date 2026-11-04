@@ -6,7 +6,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const db      = require('../db');
+const db      = require('../config/db');
 
 // ── In-Memory Fallbacks (Used if MySQL connection is unconfigured or offline) ─
 const F_SERVICES = [

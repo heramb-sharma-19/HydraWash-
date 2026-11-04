@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 */node_modules/
+**/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -30,8 +31,13 @@ logs/
 tmp/
 temp/
 dist/
+*/dist/
+**/dist/
 build/
+*/build/
+**/build/
 .cache/
+.vercel/
 
 # Large media files (videos over 50MB)
 *.mp4

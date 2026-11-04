@@ -7,8 +7,13 @@ const errorHandler = require('./middleware/error');
 
 const app = express();
 
-app.use(helmet());
-app.use(cors({ origin: (process.env.CORS_ORIGIN || '').split(',').map((s) => s.trim()).filter(Boolean) }));
+app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(cors({
+  origin: process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',').map((s) => s.trim()).filter(Boolean)
+    : true,
+  credentials: true,
+}));
 app.use(express.json({ limit: '100kb' }));
 if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'));
 
@@ -25,6 +30,7 @@ app.use('/api/me', require('./routes/me'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api', require('./routes/api_v1'));
 
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 app.use(errorHandler);
